@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
+import java.net.MalformedURLException;
 import java.util.*;
 
 /**
@@ -61,8 +62,12 @@ public class ChatService implements Visitor {
     }
 
     @Override
-    public void visit(UrlExtractor urlExtractor) {
-        chatResponse.getLinks().addAll(urlExtractor.parseLinks(inputToParse));
+    public void visit(UrlExtractor urlExtractor)  {
+        try {
+            chatResponse.getLinks().addAll(urlExtractor.parseLinks(inputToParse));
+        }catch(MalformedURLException ex){
+            throw new RuntimeException(ex);
+        }
 
     }
 

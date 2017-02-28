@@ -63,7 +63,10 @@ public class ChatResourceTest {
         String response = restTemplate.postForObject("/atlassian/v1/chat", ((Object) input), String.class);
         assertNotNull(response);
 
-        //Unable to unmarshal Link as it's not abstract class.  Pls. refer
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        ChatResponse chatResponse = objectMapper.readValue(response, ChatResponse.class);
+        assertEquals(chatResponse.getLinks().size(), 1);
 
 
     }
@@ -76,6 +79,14 @@ public class ChatResourceTest {
 
         String response = restTemplate.postForObject("/atlassian/v1/chat", ((Object) input), String.class);
         assertNotNull(response);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        ChatResponse chatResponse = objectMapper.readValue(response, ChatResponse.class);
+        assertEquals(chatResponse.getMentions().size(), 1);
+        assertEquals(chatResponse.getEmotions().size(), 2);
+        assertEquals(chatResponse.getLinks().size(), 1);
+
     }
 
 

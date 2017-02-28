@@ -1,8 +1,10 @@
 package com.atlassian.extractors;
 
+import com.atlassian.model.Links;
 import com.atlassian.visitor.Visitable;
 
 import javax.ws.rs.core.Link;
+import java.net.MalformedURLException;
 import java.util.List;
 
 public abstract class Extractor implements Visitable {
@@ -16,7 +18,7 @@ public abstract class Extractor implements Visitable {
         return null;
     }
 
-    public List<Link> parseLinks(String input){
+    public List<Links> parseLinks(String input) throws MalformedURLException {
         return null;
     }
 }

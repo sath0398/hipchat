@@ -11,7 +11,7 @@ public class ChatResponse {
 
     private List<String> mentions = new ArrayList<>();
     private List<String> emotions = new ArrayList<>();
-    private List<Link> links = new ArrayList<>();
+    private List<Links> links = new ArrayList<>();
 
     public List<String> getMentions() {
         return mentions;
@@ -21,7 +21,10 @@ public class ChatResponse {
         return emotions;
     }
 
-    public List<Link> getLinks() {
+    public List<Links> getLinks() {
         return links;
     }
+
+
 }
+

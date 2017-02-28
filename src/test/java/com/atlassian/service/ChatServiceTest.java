@@ -46,7 +46,7 @@ public class ChatServiceTest {
         ChatResponse chatResponse = chatService.find(input);
         assertEquals(1, chatResponse.getLinks().size());
         assertNotNull(chatResponse.getLinks().get(0).getTitle());
-        assertNotNull(chatResponse.getLinks().get(0).getUri());
+        assertNotNull(chatResponse.getLinks().get(0).getUrl());
 
 
     }
@@ -60,7 +60,7 @@ public class ChatServiceTest {
         ChatResponse chatResponse = chatService.find(input);
         assertEquals(1, chatResponse.getLinks().size());
         assertNotNull(chatResponse.getLinks().get(0).getTitle());
-        assertNotNull(chatResponse.getLinks().get(0).getUri());
+        assertNotNull(chatResponse.getLinks().get(0).getUrl());
 
         assertEquals(2, chatResponse.getEmotions().size());
         assertEquals(1, chatResponse.getMentions().size());

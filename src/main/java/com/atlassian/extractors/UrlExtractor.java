@@ -1,13 +1,14 @@
 package com.atlassian.extractors;
 
+import com.atlassian.model.Links;
 import com.atlassian.visitor.Visitor;
 import com.sun.jersey.api.client.Client;
-import com.sun.jersey.api.client.ClientResponse;
 import org.springframework.stereotype.Service;
 
 import com.sun.jersey.api.client.WebResource;
 
 import javax.ws.rs.core.Link;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -31,8 +32,8 @@ public class UrlExtractor extends Extractor {
 
 
     @Override
-    public List<Link> parseLinks(String input) {
-        List<Link> links = new ArrayList<>();
+    public List<Links> parseLinks(String input) throws MalformedURLException {
+        List<Links> links = new ArrayList<>();
         String[] result = input.split("\\s");
         List<String> links_temp_list = Arrays.stream(result)
                 .filter(s -> PATTERN.matcher(s).matches())
@@ -43,10 +44,9 @@ public class UrlExtractor extends Extractor {
         }
 
         for(String link: links_temp_list){
-            links.add(Link
-                    .fromUri(link)
-                    .title(getTitle(link))
-                    .build());
+            links.add(new Links(Link
+                    .fromUri(link).build().getUri().toURL().toString(),
+                    getTitle(link)));
         }
         return links;
     }
